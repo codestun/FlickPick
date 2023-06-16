@@ -1,1 +1,1 @@
-# myFlix
+# FlickPick
