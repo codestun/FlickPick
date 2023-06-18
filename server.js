@@ -1,5 +1,6 @@
-// Imports the HTTP module
+// Imports the HTTP and URL modules
 const http = require('http');
+const url = require('url');
 
 // Function from the HTTP module with two arguments
 http.createServer((request, response) => {
@@ -10,7 +11,7 @@ http.createServer((request, response) => {
   // Ends the response by sending back the message 'Hello Node!'
   response.end('Hello Node!\n');
 
-  // Listens for a repsonse on port 8080ƒ
-}).listen(8080)
+  // Listens for a response on port 8080
+}).listen(8080);
 
 console.log('My first Node test server is running on Port 8080.');
