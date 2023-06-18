@@ -1,4 +1,4 @@
-// Imports the HTTP and URL modules
+// Imports the HTTP, URL, and FS modules
 const http = require('http');
 const url = require('url');
 const fs = require('fs');
@@ -19,6 +19,15 @@ http.createServer((request, response) => {
   } else {
     filePath = 'index.html'; // Sets the file path to index.html
   }
+
+  // Logs the request URL and timestamp to the log.txt file
+  fs.appendFile('log.txt', 'URL: ' + addr + '\nTimestamp: ' + new Date() + '\n\n', (err) => {
+    if (err) {
+      console.log(err); // Logs an error message if there is an error appending to the file
+    } else {
+      console.log('Added to log.'); // Logs a success message if the data is successfully appended to the file
+    }
+  });
 
   // Reads the file specified by the filePath variable
   fs.readFile(filePath, (err, data) => {
