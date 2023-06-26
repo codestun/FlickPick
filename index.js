@@ -71,7 +71,7 @@ app.get('/movies', (req, res) => {
 
 app.use(express.static('public'));
 
-app.get('/documentation.html', (req, res) => {
+app.get('/documentation', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'documentation.html'));
 });
 
