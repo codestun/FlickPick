@@ -7,57 +7,149 @@ const path = require('path');
 
 app.use(bodyParser.json());
 
-let topMovies = [
-  // Array of movie objects
+// Use in-memory array for users
+let users = [
   {
-    title: 'Stop Making Sense',
-    director: 'Jonathan Demme',
-    year: 1984
+    id: 1,
+    name: "Kim",
+    favoriteMovies: ["The Last Waltz"]
   },
   {
-    title: 'Woodstock',
-    director: 'Michael Wadleigh',
-    year: 1970
+    id: 2,
+    name: "Joe",
+    favoriteMovies: []
+  },
+];
+
+// Use in-memory array for movies
+let movies = [
+  {
+    title: "The Last Waltz",
+    description: "A legendary farewell concert by The Band featuring various guest artists.",
+    year: 1978,
+    genre: {
+      name: "Rock, Documentary",
+      description: "Combines elements of rock music and documentary filmmaking to capture the essence of the concert."
+    },
+    director: {
+      name: "Martin Scorsese"
+    },
+    imageURL: ""
   },
   {
-    title: 'The Last Waltz',
-    director: 'Martin Scorsese',
-    year: 1978
+    title: "Stop Making Sense",
+    description: "An iconic live performance by Talking Heads, known for its innovative staging and energetic performances.",
+    year: 1984,
+    genre: {
+      name: "Rock, New Wave",
+      description: "Blends the rock genre with elements of punk, art, and pop music, characterized by its unique style and energy."
+    },
+    director: {
+      name: "Jonathan Demme"
+    },
+    imageURL: ""
   },
   {
-    title: 'Gimme Shelter',
-    director: 'Albert Maysles and David Maysles',
-    year: 1970
+    title: "Woodstock",
+    description: "The famous music festival held in 1969, capturing the spirit of the counterculture movement.",
+    year: 1970,
+    genre: {
+      name: "Documentary, Music",
+      description: "Combines the documentary format with live music performances, providing a comprehensive experience of the festival."
+    },
+    director: {
+      name: "Michael Wadleigh"
+    },
+    imageURL: ""
   },
   {
-    title: 'Shine a Light',
-    director: 'Martin Scorsese',
-    year: 2008
+    title: "Pulse",
+    description: "Pink Floyd's stunning concert in London featuring their classic hits and elaborate stage effects.",
+    year: 1995,
+    genre: {
+      name: "Progressive Rock",
+      description: "Pushes the boundaries of rock music by incorporating complex musical structures and conceptual themes."
+    },
+    director: "David Mallet",
+    imageURL: ""
   },
   {
-    title: 'Monterey Pop',
-    director: 'D.A. Pennebaker',
-    year: 1968
+    title: "Monterey Pop",
+    description: "A groundbreaking documentary capturing the performances at the 1967 Monterey Pop Festival, including Jimi Hendrix, Janis Joplin, and The Who.",
+    year: 1968,
+    genre: {
+      name: "Documentary, Music",
+      description: "Provides an immersive experience of the historic music festival, showcasing iconic performances and cultural moments."
+    },
+    director: {
+      name: "D.A. Pennebaker"
+    },
+    imageURL: ""
   },
   {
-    title: 'Pink Floyd: The Wall',
-    director: 'Alan Parker',
-    year: 1982
+    title: "Shine a Light",
+    description: "Martin Scorsese directs this concert film featuring The Rolling Stones performing live in New York City.",
+    year: 2008,
+    genre: {
+      name: "Rock, Documentary",
+      description: "Offers a glimpse into the rock 'n' roll world through the electrifying performances of The Rolling Stones."
+    },
+    director: {
+      name: "Martin Scorsese",
+    },
+    imageURL: ""
   },
   {
-    title: 'U2 3D',
-    director: 'Catherine Owens and Mark Pellington',
-    year: 2007
+    title: "Gimme Shelter",
+    description: "A documentary that chronicles The Rolling Stones' 1969 American tour, culminating in the infamous Altamont Free Concert.",
+    year: 1970,
+    genre: {
+      name: "Documentary, Music",
+      description: "Explores the intersection of music and social unrest, capturing a pivotal moment in rock history."
+    },
+    director: {
+      name: "Albert and David Maysles"
+    },
+    imageURL: ""
   },
   {
-    title: 'Festival Express',
-    director: 'Bob Smeaton',
-    year: 2003
+    title: "Live at Pompeii",
+    description: "Pink Floyd's iconic concert film, capturing their performances in an ancient Roman amphitheater in Pompeii.",
+    year: 1972,
+    genre: {
+      name: "Progressive Rock",
+      description: "Showcases Pink Floyd's progressive rock soundscapes and mesmerizing visuals, set against the backdrop of Pompeii's historic ruins."
+    },
+    director: {
+      name: "Adrian Maben"
+    },
+    imageURL: ""
   },
   {
-    title: 'The Song Remains the Same',
-    director: 'Peter Clifton and Joe Massot',
-    year: 1976
+    title: "The Song Remains the Same",
+    description: "Led Zeppelin's concert film featuring footage from their 1973 performances at Madison Square Garden in New York City.",
+    year: 1976,
+    genre: {
+      name: "Rock",
+      description: "Presents Led Zeppelin's energetic live performances, capturing the essence of their iconic rock music."
+    },
+    director: {
+      name: "Peter Clifton, Joe Massot"
+    },
+    imageURL: ""
+  },
+  {
+    title: "Rattle and Hum",
+    description: "U2's exploration of American music and culture during their 1987 Joshua Tree Tour, featuring live performances and documentary segments.",
+    year: 1988,
+    genre: {
+      name: "Rock, Documentary",
+      description: "Blends U2's passionate rock music with insightful glimpses into American history and society."
+    },
+    director: {
+      name: "Phil Joanou"
+    },
+    imageURL: ""
   }
 ];
 
@@ -69,7 +161,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/movies', (req, res) => {
-  res.json(topMovies);
+  res.json(movies);
 });
 
 app.use(express.static('public'));
