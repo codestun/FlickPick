@@ -1,8 +1,11 @@
 const express = require('express');
+const app = express();
 const morgan = require('morgan');
+const bodyParser = require('body-parser');
+const uuid = require('uuid');
 const path = require('path');
 
-const app = express();
+app.use(bodyParser.json());
 
 let topMovies = [
   // Array of movie objects
