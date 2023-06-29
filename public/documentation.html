@@ -4,22 +4,118 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>FlickPick</title>
+  <title>FlickPick API Documentation</title>
 </head>
 
 <body>
-  <h1>FlickPick documentation</h1>
-  <p>This project is about building a server-side component of a “movies”
-    web application which will provide users with access to information
-    about different
-    <ul>
-      <li>movies</li>
-      <li>directors</li>
-      <li> and genres</li>
-    </ul>
-    Users will be able to <strong>sign up</strong>, <strong>update</strong> their
-    personal information, and <strong>create</strong> a list of their favorite movies.
-  </p>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+  </style>
+
+  <h1>FlickPick API Documentation</h1>
+  <div>
+    <p>This project is about building a server-side component of a “movies”
+      web application which will provide users with access to information
+      about different concert movies, directors and genres.<br>
+      Users will be able to <strong>sign up</strong>, <strong>update</strong> their
+      personal information, and <strong>create</strong> a list of their favorite movies.
+    </p>
+  </div>
+  <table>
+    <tr>
+      <th>Endpoint</th>
+      <th>Description</th>
+      <th>Method</th>
+      <th>URL Parameters</th>
+      <th>Request Body</th>
+      <th>Response Data</th>
+    </tr>
+    <tr>
+      <td>/users</td>
+      <td>Allow new users to register</td>
+      <td>POST</td>
+      <td>None</td>
+      <td>{"name": "string"}</td>
+      <td>Created user object</td>
+    </tr>
+    <tr>
+      <td>/users/:id</td>
+      <td>Allow users to update their user info (username)</td>
+      <td>PUT</td>
+      <td>id: User ID</td>
+      <td>{"name": "string"}</td>
+      <td>Updated user object</td>
+    </tr>
+    <tr>
+      <td>/users/:id/:movieTitle</td>
+      <td>Allow users to add a movie to their list of favorites</td>
+      <td>POST</td>
+      <td>id: User ID, movieTitle: Movie Title</td>
+      <td>None</td>
+      <td>Success message</td>
+    </tr>
+    <tr>
+      <td>/users/:id/:movieTitle</td>
+      <td>Allows users to delete a movie from their favorites</td>
+      <td>DELETE</td>
+      <td>id: User ID, movieTitle: Movie Title</td>
+      <td>None</td>
+      <td>Success message</td>
+    </tr>
+    <tr>
+      <td>/users/:id</td>
+      <td>Allow existing users to deregister</td>
+      <td>DELETE</td>
+      <td>id: User ID</td>
+      <td>None</td>
+      <td>Success message</td>
+    </tr>
+    <tr>
+      <td>/movies</td>
+      <td>Return a list of all movies</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>None</td>
+      <td>List of all movies</td>
+    </tr>
+    <tr>
+      <td>/movies/:title</td>
+      <td>Return data about a single movie by title</td>
+      <td>GET</td>
+      <td>title: Movie Title</td>
+      <td>None</td>
+      <td>Movie object</td>
+    </tr>
+    <tr>
+      <td>/movies/genre/:genreName</td>
+      <td>Return data about a genre by name/title</td>
+      <td>GET</td>
+      <td>genreName: Genre Name</td>
+      <td>None</td>
+      <td>Genre object</td>
+    </tr>
+    <tr>
+      <td>/movies/directors/:directorName</td>
+      <td>Return data about a director by name</td>
+      <td>GET</td>
+      <td>directorName: Director Name</td>
+      <td>None</td>
+      <td>Director object</td>
+    </tr>
+  </table>
 </body>
 
 </html>
