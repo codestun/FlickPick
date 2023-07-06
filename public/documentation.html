@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>flickPick API Documentation</title>
+  <title>FlickPick API Documentation</title>
 </head>
 
 <body>
@@ -25,13 +25,13 @@
     }
   </style>
 
-  <h1>flickPick API Documentation</h1>
+  <h1>FlickPick API Documentation</h1>
   <div>
     <p>This project is about building a server-side component of a "movies"
       web application which will provide users with access to information
-      about different concert movies, directors and genres.<br>
-      Users will be able to perform <strong>CRUD</strong> operations, on their
-      personal information, and <strong>create</strong> a list of their favorite movies.
+      about different concert movies, directors, and genres.<br>
+      Users will be able to perform <strong>CRUD</strong> operations on their
+      personal information and <strong>create</strong> a list of their favorite movies.
     </p>
   </div>
   <table>
@@ -50,10 +50,10 @@
       <td>None</td>
       <td>{"Name": "string", "Password": "string", "Email": "string", "Birthday": "date"}</td>
       <td> {
-        "name": "Gary Hauch",
-        "password": "**********",
-        "email": "Gary@Hauch.com",
-        "birthday": "1967-05-15" }
+        "Name": "Gary Hauch",
+        "Password": "**********",
+        "Email": "Gary@Hauch.com",
+        "Birthday": "1967-05-15" }
       </td>
     </tr>
     <tr>
@@ -61,13 +61,18 @@
       <td>Allow users to update their user info</td>
       <td>PUT</td>
       <td>Name: User Name</td>
-      <td>{"Name": "string", "Password": "string", "Email": "string", "Birthday": "date"}</td>
+      <td>{
+        "Name": "Gary Hauch",
+        "Password": "**********",
+        "Email": "Gary@Hauch.com",
+        "Birthday": "1967-05-15" }
+      </td>
       <td> {
-        "name": "Gary Hauch",
-        "password": "**********",
-        "email": "Gary@Hauch.com",
-        "birthday": "1967-05-15",
-        "favoriteMovies": [] }
+        "Name": "Gary",
+        "Password": "**********",
+        "Email": "Gary@Hauch.com",
+        "Birthday": "1967-05-15",
+        "FavoriteMovies": [] }
       </td>
     </tr>
     <tr>
@@ -76,18 +81,18 @@
       <td>POST</td>
       <td>Name: User Name, MovieID: Movie ID</td>
       <td> {
-        "name": "Gary Hauch",
-        "password": "**********",
-        "email": "Gary@Hauch.com",
-        "birthday": "1967-05-15",
-        "favoriteMovies": [] }
+        "Name": "Gary Hauch",
+        "Password": "**********",
+        "Email": "Gary@Hauch.com",
+        "Birthday": "1967-05-15",
+        "FavoriteMovies": [] }
       </td>
       <td> {
-        "name": "Gary",
-        "password": "**********",
-        "email": "Gary@Hauch.com",
-        "birthday": "1967-05-15",
-        "favoriteMovies": ["617e82c62f50f47278a35a3e"] }
+        "Name": "Gary Hauch",
+        "Password": "**********",
+        "Email": "Gary@Hauch.com",
+        "Birthday": "1967-05-15",
+        "FavoriteMovies": ["617e82c62f50f47278a35a3e"]]
       </td>
     </tr>
     <tr>
@@ -96,18 +101,18 @@
       <td>DELETE</td>
       <td>Name: User Name, MovieID: Movie ID</td>
       <td> {
-        "name": "Gary Hauch",
-        "password": "**********",
-        "email": "Gary@Hauch.com",
-        "birthday": "1967-05-15",
-        "favoriteMovies": ["617e82c62f50f47278a35a3e"] }
+        "Name": "Gary Hauch",
+        "Password": "**********",
+        "Email": "Gary@Hauch.com",
+        "Birthday": "1967-05-15",
+        "FavoriteMovies": ["617e82c62f50f47278a35a3e"] }
       </td>
       <td> {
-        "name": "Gary Hauch",
-        "password": "**********",
-        "email": "Gary@Hauch.com",
-        "birthday": "1967-05-15",
-        "favoriteMovies": [] }
+        "Name": "Gary Hauch",
+        "Password": "**********",
+        "Email": "Gary@Hauch.com",
+        "Birthday": "1967-05-15",
+        "FavoriteMovies": [] }
       </td>
     </tr>
     <tr>
@@ -126,21 +131,29 @@
       <td>None</td>
       <td>[
         {
-        "title": "The Last Waltz",
-        "description": "A legendary farewell concert by The Band featuring various guest artists.",
-        "year": 1978,
-        "genre": {
-        "name": "Rock, Documentary",
-        "description": "Combines elements of rock music and documentary filmmaking to capture the essence of the
-        concert."
-        },
-        "director": {
-        "name": "Martin Scorsese"
-        },
-        "imageURL": ""
+          "Genre": {
+            "Name": "Musical, Drama, Romance",
+            "Description": "Blends heartfelt musical performances with a touching story of love, dreams, and the power of music."
+          },
+          "Director": {
+            "Name": "John Carney",
+            "Bio": "John Carney is an Irish filmmaker known for his work in the music genre, including directing 'Once' and 'Sing Street.'",
+            "BirthYear": 1972,
+            "DeathYear": null,
+            "Movies": [
+              "Once"
+            ]
+          },
+          "Actors": [],
+          "_id": "64a3198a1519190b136df646",
+          "Title": "Once",
+          "Description": "A musical drama about a Dublin street musician and a Czech immigrant who form an unlikely bond through their shared love of music.",
+          "Year": 2007,
+          "ImagePath": "once.png",
+          "Featured": true
         },
         ...
-        ]</td>
+      ]</td>
     </tr>
     <tr>
       <td>/movies/:Title</td>
@@ -149,18 +162,26 @@
       <td>Title: Movie Title</td>
       <td>None</td>
       <td>[ {
-        "title": "The Last Waltz",
-        "description": "A legendary farewell concert by The Band featuring various guest artists.",
-        "year": 1978,
-        "genre": {
-        "name": "Rock, Documentary",
-        "description": "Combines elements of rock music and documentary filmmaking to capture the essence of the
-        concert."
+        "Genre": {
+          "Name": "Musical, Drama, Romance",
+          "Description": "Blends heartfelt musical performances with a touching story of love, dreams, and the power of music."
         },
-        "director": {
-        "name": "Martin Scorsese"
+        "Director": {
+          "Name": "John Carney",
+          "Bio": "John Carney is an Irish filmmaker known for his work in the music genre, including directing 'Once' and 'Sing Street.'",
+          "BirthYear": 1972,
+          "DeathYear": null,
+          "Movies": [
+            "Once"
+          ]
         },
-        "imageURL": "" }]
+        "Actors": [],
+        "_id": "64a3198a1519190b136df646",
+        "Title": "Once",
+        "Description": "A musical drama about a Dublin street musician and a Czech immigrant who form an unlikely bond through their shared love of music.",
+        "Year": 2007,
+        "ImagePath": "once.png",
+        "Featured": true }]
       </td>
     </tr>
     <tr>
@@ -170,9 +191,8 @@
       <td>Name: Genre Name</td>
       <td>None</td>
       <td>{
-        "name": "Rock, Documentary",
-        "description": "Combines elements of rock music and documentary filmmaking to capture the essence of the
-        concert."
+        "Name": "Rock, Documentary",
+        "Description": "Combines elements of rock music and documentary filmmaking to capture the essence of the concert."
         }
       </td>
     </tr>
@@ -183,10 +203,10 @@
       <td>Name: Director Name</td>
       <td>None</td>
       <td>{
-        "name": "Martin Scorsese",
-        "bio": "Example bio information",
-        "birthYear": 1942,
-        "deathYear": null}
+        "Name": "Martin Scorsese",
+        "Bio": "Example bio information",
+        "BirthYear": 1942,
+        "DeathYear": null}
       </td>
     </tr>
     <tr>
@@ -197,14 +217,14 @@
       <td>None</td>
       <td>[
         {
-        "name": "Gary Hauch",
-        "password": "**********",
-        "email": "Gary@Hauch.com",
-        "birthday": "1967-05-15",
-        "favoriteMovies": ["617e82c62f50f47278a35a3e"]
+          "Name": "Gary Hauch",
+          "Password": "**********",
+          "Email": "Gary@Hauch.com",
+          "Birthday": "1967-05-15",
+          "FavoriteMovies": ["617e82c62f50f47278a35a3e"]
         },
         ...
-        ]</td>
+      ]</td>
     </tr>
     <tr>
       <td>/users/:Name</td>
@@ -214,13 +234,13 @@
       <td>None</td>
       <td>[
         {
-        "name": "Gary Hauch",
-        "password": "**********",
-        "email": "Gary@Hauch.com",
-        "birthday": "1967-05-15",
-        "favoriteMovies": ["617e82c62f50f47278a35a3e"]
+          "Name": "Gary Hauch",
+          "Password": "**********",
+          "Email": "Gary@Hauch.com",
+          "Birthday": "1967-05-15",
+          "FavoriteMovies": ["617e82c62f50f47278a35a3e"]
         }
-        ]</td>
+      ]</td>
     </tr>
   </table>
 
