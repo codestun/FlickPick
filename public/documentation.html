@@ -49,7 +49,12 @@
       <td>POST</td>
       <td>None</td>
       <td>{"Name": "string", "Password": "string", "Email": "string", "Birthday": "date"}</td>
-      <td>Created user object</td>
+      <td> {
+        "name": "Gary Hauch",
+        "password": "**********",
+        "email": "Gary@Hauch.com",
+        "birthday": "1967-05-15" }
+      </td>
     </tr>
     <tr>
       <td>/users/:Name</td>
@@ -57,31 +62,61 @@
       <td>PUT</td>
       <td>Name: User Name</td>
       <td>{"Name": "string", "Password": "string", "Email": "string", "Birthday": "date"}</td>
-      <td>Updated user object</td>
+      <td> {
+        "name": "Gary Hauch",
+        "password": "**********",
+        "email": "Gary@Hauch.com",
+        "birthday": "1967-05-15",
+        "favoriteMovies": [] }
+      </td>
     </tr>
     <tr>
       <td>/users/:Name/movies/:MovieID</td>
       <td>Allow users to add a movie to their list of favorites</td>
       <td>POST</td>
       <td>Name: User Name, MovieID: Movie ID</td>
-      <td>None</td>
-      <td>Success message</td>
+      <td> {
+        "name": "Gary Hauch",
+        "password": "**********",
+        "email": "Gary@Hauch.com",
+        "birthday": "1967-05-15",
+        "favoriteMovies": [] }
+      </td>
+      <td> {
+        "name": "Gary",
+        "password": "**********",
+        "email": "Gary@Hauch.com",
+        "birthday": "1967-05-15",
+        "favoriteMovies": ["617e82c62f50f47278a35a3e"] }
+      </td>
     </tr>
     <tr>
       <td>/users/:Name/movies/:MovieID</td>
       <td>Allow users to remove a movie from their list of favorites</td>
       <td>DELETE</td>
       <td>Name: User Name, MovieID: Movie ID</td>
-      <td>None</td>
-      <td>Success message</td>
+      <td> {
+        "name": "Gary Hauch",
+        "password": "**********",
+        "email": "Gary@Hauch.com",
+        "birthday": "1967-05-15",
+        "favoriteMovies": ["617e82c62f50f47278a35a3e"] }
+      </td>
+      <td> {
+        "name": "Gary Hauch",
+        "password": "**********",
+        "email": "Gary@Hauch.com",
+        "birthday": "1967-05-15",
+        "favoriteMovies": [] }
+      </td>
     </tr>
     <tr>
       <td>/users/:Name</td>
       <td>Allow existing users to deregister</td>
       <td>DELETE</td>
       <td>Name: User Name</td>
-      <td>None</td>
-      <td>Success message</td>
+      <td>"Name": "Gary Hauch"</td>
+      <td> Success message: "Gary Hauch" was deleted</td>
     </tr>
     <tr>
       <td>/movies</td>
@@ -89,7 +124,23 @@
       <td>GET</td>
       <td>None</td>
       <td>None</td>
-      <td>Array of movie objects</td>
+      <td>[
+        {
+        "title": "The Last Waltz",
+        "description": "A legendary farewell concert by The Band featuring various guest artists.",
+        "year": 1978,
+        "genre": {
+        "name": "Rock, Documentary",
+        "description": "Combines elements of rock music and documentary filmmaking to capture the essence of the
+        concert."
+        },
+        "director": {
+        "name": "Martin Scorsese"
+        },
+        "imageURL": ""
+        },
+        ...
+        ]</td>
     </tr>
     <tr>
       <td>/movies/:Title</td>
@@ -97,7 +148,20 @@
       <td>GET</td>
       <td>Title: Movie Title</td>
       <td>None</td>
-      <td>Movie object</td>
+      <td>[ {
+        "title": "The Last Waltz",
+        "description": "A legendary farewell concert by The Band featuring various guest artists.",
+        "year": 1978,
+        "genre": {
+        "name": "Rock, Documentary",
+        "description": "Combines elements of rock music and documentary filmmaking to capture the essence of the
+        concert."
+        },
+        "director": {
+        "name": "Martin Scorsese"
+        },
+        "imageURL": "" }]
+      </td>
     </tr>
     <tr>
       <td>/genres/:Name</td>
@@ -105,15 +169,25 @@
       <td>GET</td>
       <td>Name: Genre Name</td>
       <td>None</td>
-      <td>Genre object</td>
+      <td>{
+        "name": "Rock, Documentary",
+        "description": "Combines elements of rock music and documentary filmmaking to capture the essence of the
+        concert."
+        }
+      </td>
     </tr>
     <tr>
       <td>/directors/:Name</td>
-      <td>Return data about a director by name</td>
+      <td>Return data about a director (bio, birth year, death year) by name</td>
       <td>GET</td>
       <td>Name: Director Name</td>
       <td>None</td>
-      <td>Director object</td>
+      <td>{
+        "name": "Martin Scorsese",
+        "bio": "Example bio information",
+        "birthYear": 1942,
+        "deathYear": null}
+      </td>
     </tr>
     <tr>
       <td>/users</td>
@@ -121,7 +195,16 @@
       <td>GET</td>
       <td>None</td>
       <td>None</td>
-      <td>Array of user objects</td>
+      <td>[
+        {
+        "name": "Gary Hauch",
+        "password": "**********",
+        "email": "Gary@Hauch.com",
+        "birthday": "1967-05-15",
+        "favoriteMovies": ["617e82c62f50f47278a35a3e"]
+        },
+        ...
+        ]</td>
     </tr>
     <tr>
       <td>/users/:Name</td>
@@ -129,7 +212,15 @@
       <td>GET</td>
       <td>Name: User Name</td>
       <td>None</td>
-      <td>User object</td>
+      <td>[
+        {
+        "name": "Gary Hauch",
+        "password": "**********",
+        "email": "Gary@Hauch.com",
+        "birthday": "1967-05-15",
+        "favoriteMovies": ["617e82c62f50f47278a35a3e"]
+        }
+        ]</td>
     </tr>
   </table>
 
