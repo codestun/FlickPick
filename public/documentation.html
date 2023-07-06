@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width" />
-  <title>FlickPick API Documentation</title>
+  <title>flickPick API Documentation</title>
 </head>
 
 <body>
@@ -25,12 +25,12 @@
     }
   </style>
 
-  <h1>FlickPick API Documentation</h1>
+  <h1>flickPick API Documentation</h1>
   <div>
-    <p>This project is about building a server-side component of a “movies”
+    <p>This project is about building a server-side component of a "movies"
       web application which will provide users with access to information
       about different concert movies, directors and genres.<br>
-      Users will be able to <strong>sign up</strong>, <strong>update</strong> their
+      Users will be able to perform <strong>CRUD</strong> operations, on their
       personal information, and <strong>create</strong> a list of their favorite movies.
     </p>
   </div>
@@ -48,74 +48,97 @@
       <td>Allow new users to register</td>
       <td>POST</td>
       <td>None</td>
-      <td>{"name": "string"}</td>
+      <td>{"Name": "string", "Password": "string", "Email": "string", "Birthday": "date"}</td>
       <td>Created user object</td>
     </tr>
     <tr>
-      <td>/users/:id</td>
-      <td>Allow users to update their user info (username)</td>
+      <td>/users/:Name</td>
+      <td>Allow users to update their user info</td>
       <td>PUT</td>
-      <td>id: User ID</td>
-      <td>{"name": "string"}</td>
+      <td>Name: User Name</td>
+      <td>{"Name": "string", "Password": "string", "Email": "string", "Birthday": "date"}</td>
       <td>Updated user object</td>
     </tr>
     <tr>
-      <td>/users/:id/:movieTitle</td>
+      <td>/users/:Name/movies/:MovieID</td>
       <td>Allow users to add a movie to their list of favorites</td>
       <td>POST</td>
-      <td>id: User ID, movieTitle: Movie Title</td>
+      <td>Name: User Name, MovieID: Movie ID</td>
       <td>None</td>
       <td>Success message</td>
     </tr>
     <tr>
-      <td>/users/:id/:movieTitle</td>
-      <td>Allows users to delete a movie from their favorites</td>
+      <td>/users/:Name/movies/:MovieID</td>
+      <td>Allow users to remove a movie from their list of favorites</td>
       <td>DELETE</td>
-      <td>id: User ID, movieTitle: Movie Title</td>
+      <td>Name: User Name, MovieID: Movie ID</td>
       <td>None</td>
       <td>Success message</td>
     </tr>
     <tr>
-      <td>/users/:id</td>
+      <td>/users/:Name</td>
       <td>Allow existing users to deregister</td>
       <td>DELETE</td>
-      <td>id: User ID</td>
+      <td>Name: User Name</td>
       <td>None</td>
       <td>Success message</td>
     </tr>
     <tr>
       <td>/movies</td>
-      <td>Return a list of all movies</td>
+      <td>Return JSON object containing data about all movies</td>
       <td>GET</td>
       <td>None</td>
       <td>None</td>
-      <td>List of all movies</td>
+      <td>Array of movie objects</td>
     </tr>
     <tr>
-      <td>/movies/:title</td>
-      <td>Return data about a single movie by title</td>
+      <td>/movies/:Title</td>
+      <td>Return JSON object containing data about a single movie by title</td>
       <td>GET</td>
-      <td>title: Movie Title</td>
+      <td>Title: Movie Title</td>
       <td>None</td>
       <td>Movie object</td>
     </tr>
     <tr>
-      <td>/movies/genre/:genreName</td>
-      <td>Return data about a genre by name/title</td>
+      <td>/genres/:Name</td>
+      <td>Return data about a genre (description) by name/title (e.g., "Rock")</td>
       <td>GET</td>
-      <td>genreName: Genre Name</td>
+      <td>Name: Genre Name</td>
       <td>None</td>
       <td>Genre object</td>
     </tr>
     <tr>
-      <td>/movies/directors/:directorName</td>
+      <td>/directors/:Name</td>
       <td>Return data about a director by name</td>
       <td>GET</td>
-      <td>directorName: Director Name</td>
+      <td>Name: Director Name</td>
       <td>None</td>
       <td>Director object</td>
     </tr>
+    <tr>
+      <td>/users</td>
+      <td>Return JSON object containing data about all users</td>
+      <td>GET</td>
+      <td>None</td>
+      <td>None</td>
+      <td>Array of user objects</td>
+    </tr>
+    <tr>
+      <td>/users/:Name</td>
+      <td>Return JSON object containing data about a single user by name</td>
+      <td>GET</td>
+      <td>Name: User Name</td>
+      <td>None</td>
+      <td>User object</td>
+    </tr>
   </table>
+
+  <h2>Other Routes</h2>
+  <ul>
+    <li>GET / - Default text response</li>
+    <li>GET /documentation - Documentation endpoint</li>
+  </ul>
+
 </body>
 
 </html>
