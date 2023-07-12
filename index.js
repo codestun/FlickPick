@@ -33,7 +33,7 @@ const Users = Models.User;
 
 /* ------ Routes for Movies -------- */
 // Return JSON object containing data about all movies
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', { session: false }), (req, res) => {
   Movies.find()
   .then((movies) => {
     res.status(200).json(movies);
