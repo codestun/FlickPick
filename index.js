@@ -12,6 +12,13 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// Import "auth.js" file
+let auth = require('./auth')(app);
+
+// Require the Passport module and import the "passport.js" file
+const passport = require('passport');
+require('./passport');
+
 // Set up Morgan for logging functionality
 app.use(morgan('combined'));
 
