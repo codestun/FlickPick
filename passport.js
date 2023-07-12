@@ -19,21 +19,19 @@ passport.use(new LocalStrategy({
   console.log(name + '  ' + password);
 
   // Find a user in the database by name
-  Users.findOne({ Name: name }, (error, user) => {
-    if (error) {
+  Users.findOne({ Name: name })
+    .then((user) => {
+      if (!user) {
+        console.log('incorrect name');
+        return callback(null, false, { message: 'Incorrect name or password.' });
+      }
+      console.log('finished');
+      return callback(null, user);
+    })
+    .catch((error) => {
       console.log(error);
       return callback(error);
-    }
-
-    if (!user) {
-      console.log('incorrect name');
-
-      // If user is not found or password is incorrect, return appropriate messages
-      return callback(null, false, { message: 'Incorrect name or password.' });
-    }
-    console.log('finished');
-    return callback(null, user);
-  });
+    });
 }));
 
 // JWT strategy for authenticating users with JSON Web Tokens (JWT)
