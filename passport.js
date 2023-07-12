@@ -9,27 +9,27 @@ let Users = Models.User,
   JWTStrategy = passportJWT.Strategy,
   ExtractJWT = passportJWT.ExtractJwt;
 
-// Local strategy for authenticating users with username and password
+// Local strategy for authenticating users with name and password
 passport.use(new LocalStrategy({
-  usernameField: 'Username',
+  usernameField: 'Name',
   passwordField: 'Password'
-}, (username, password, callback) => {
+}, (name, password, callback) => {
 
-  // Output the received username and password for debugging purposes
-  console.log(username + '  ' + password);
+  // Output the received name and password for debugging purposes
+  console.log(name + '  ' + password);
 
-  // Find a user in the database by username
-  Users.findOne({ Username: username }, (error, user) => {
+  // Find a user in the database by name
+  Users.findOne({ Name: name }, (error, user) => {
     if (error) {
       console.log(error);
       return callback(error);
     }
 
     if (!user) {
-      console.log('incorrect username');
+      console.log('incorrect name');
 
       // If user is not found or password is incorrect, return appropriate messages
-      return callback(null, false, { message: 'Incorrect username or password.' });
+      return callback(null, false, { message: 'Incorrect name or password.' });
     }
     console.log('finished');
     return callback(null, user);
