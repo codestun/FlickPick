@@ -118,7 +118,7 @@ app.get('/users/:Name', passport.authenticate('jwt', { session: false }), (req, 
 });
 
 // Allow new users to register
-app.post('/users', passport.authenticate('jwt', { session: false }), (req, res) => {
+app.post('/users', (req, res) => {
   Users.findOne({ Name: req.body.Name })
     .then((user) => {
       if (user) {
