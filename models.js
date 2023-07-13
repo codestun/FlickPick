@@ -26,6 +26,11 @@ let userSchema = mongoose.Schema({
   FavoriteMovies: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Movie' }]
 });
 
+// Method to verify the password
+userSchema.methods.isValidPassword = function (password) {
+  return this.Password === password;
+};
+
 // Create the Movie model using the movie schema
 let Movie = mongoose.model('Movie', movieSchema);
 
