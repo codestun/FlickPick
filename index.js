@@ -119,6 +119,10 @@ app.get('/users/:Name', passport.authenticate('jwt', { session: false }), (req, 
 
 // Allow new users to register
 app.post('/users', (req, res) => {
+  // Validate the request body data
+  if (!req.body.Name || !req.body.Password || !req.body.Email || !req.body.Birthday) {
+    return res.status(400).send('Incomplete user data');
+  }
 
   // Password in the req.body gets hashed
   let hashedPassword = Users.hashPassword(req.body.Password);
@@ -153,6 +157,11 @@ app.post('/users', (req, res) => {
 
 // Allow users to update their user info
 app.put('/users/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
+  // Validate the request body data
+  if (!req.body.Name || !req.body.Email || !req.body.Birthday) {
+    return res.status(400).send('Incomplete user data');
+  }
+
   Users.findOneAndUpdate(
     { Name: req.params.Name },
     {
