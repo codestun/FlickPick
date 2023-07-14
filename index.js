@@ -119,14 +119,22 @@ app.get('/users/:Name', passport.authenticate('jwt', { session: false }), (req, 
 
 // Allow new users to register
 app.post('/users', (req, res) => {
+
+  // Password in the req.body gets hashed
+  let hashedPassword = Users.hashPassword(req.body.Password);
+
+  // Search for an existing user with the requested name
   Users.findOne({ Name: req.body.Name })
     .then((user) => {
       if (user) {
+        // If the user is found, send a response that it already exists
         return res.status(400).send(req.body.Name + ' already exists');
       } else {
+
+        // If no user was found, the code proceeds to create a new user using the hashed password
         Users.create({
           Name: req.body.Name,
-          Password: req.body.Password,
+          Password: hashedPassword,
           Email: req.body.Email,
           Birthday: req.body.Birthday
         })
@@ -134,7 +142,7 @@ app.post('/users', (req, res) => {
           .catch((error) => {
             console.error(error);
             res.status(500).send('Error: ' + error);
-          })
+          });
       }
     })
     .catch((error) => {
