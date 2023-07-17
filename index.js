@@ -27,11 +27,14 @@ require('./passport');
 // Set up Morgan for logging functionality
 app.use(morgan('combined'));
 
-// Connect to the database
-mongoose.connect('mongodb://localhost:27017/fpDB', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
+// Connect to the MongoDB database using the connection URI from environment variable
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// Connect to the MongoDB database using the local connection URI
+// mongoose.connect('mongodb://localhost:27017/fpDB', {
+//   useNewUrlParser: true,
+//   useUnifiedTopology: true
+// });
 
 const Movies = Models.Movie;
 const Users = Models.User;
@@ -267,6 +270,6 @@ app.use((err, req, res, next) => {
 
 // Listen for connections
 const port = process.env.PORT || 8080;
-app.listen(port, '0.0.0.0',() => {
- console.log('Listening on Port ' + port);
+app.listen(port, '0.0.0.0', () => {
+  console.log('Listening on Port ' + port);
 });
