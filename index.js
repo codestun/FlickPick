@@ -120,6 +120,13 @@ app.get('/users/:Name', passport.authenticate('jwt', { session: false }), (req, 
 
 // Allow new users to register
 app.post('/users', (req, res) => {
+  // check the validation object for errors
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   // Password in the req.body gets hashed
   let hashedPassword = Users.hashPassword(req.body.Password);
 
@@ -132,13 +139,12 @@ app.post('/users', (req, res) => {
       } else {
 
         // If no user was found, the code proceeds to create a new user using the hashed password
-        Users
-          .create({
-            Name: req.body.Name,
-            Password: hashedPassword,
-            Email: req.body.Email,
-            Birthday: req.body.Birthday
-          })
+        Users.create({
+          Name: req.body.Name,
+          Password: hashedPassword,
+          Email: req.body.Email,
+          Birthday: req.body.Birthday
+        })
           .then((user) => { res.status(201).json(user) })
           .catch((error) => {
             console.error(error);
@@ -152,8 +158,15 @@ app.post('/users', (req, res) => {
     });
 });
 
-// Allow users to update their user info
-app.put('/users/:Name', passport.authenticate('jwt', { session: false }), (req, res) => {
+/// Allow users to update their user info
+app.put('/users/:Name', (req, res) => {
+  // check the validation object for errors
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  }
+
   // Validate the request body data
   if (!req.body.Name || !req.body.Email || !req.body.Birthday) {
     return res.status(400).send('Incomplete user data');
