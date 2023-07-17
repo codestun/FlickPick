@@ -6,6 +6,7 @@ const path = require('path');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const Models = require('./models.js');
+const { check, validationResult } = require('express-validator');
 
 // Set up express and body-parser
 const app = express();
@@ -119,11 +120,6 @@ app.get('/users/:Name', passport.authenticate('jwt', { session: false }), (req, 
 
 // Allow new users to register
 app.post('/users', (req, res) => {
-  // Validate the request body data
-  if (!req.body.Name || !req.body.Password || !req.body.Email || !req.body.Birthday) {
-    return res.status(400).send('Incomplete user data');
-  }
-
   // Password in the req.body gets hashed
   let hashedPassword = Users.hashPassword(req.body.Password);
 
@@ -136,12 +132,13 @@ app.post('/users', (req, res) => {
       } else {
 
         // If no user was found, the code proceeds to create a new user using the hashed password
-        Users.create({
-          Name: req.body.Name,
-          Password: hashedPassword,
-          Email: req.body.Email,
-          Birthday: req.body.Birthday
-        })
+        Users
+          .create({
+            Name: req.body.Name,
+            Password: hashedPassword,
+            Email: req.body.Email,
+            Birthday: req.body.Birthday
+          })
           .then((user) => { res.status(201).json(user) })
           .catch((error) => {
             console.error(error);
