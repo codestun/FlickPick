@@ -119,10 +119,14 @@ app.get('/users/:Name', passport.authenticate('jwt', { session: false }), (req, 
 });
 
 // Allow new users to register
-app.post('/users', (req, res) => {
-  // check the validation object for errors
+app.post('/users', [
+  check('Name', 'Name is required').notEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail(),
+  check('Password', 'Password is required').notEmpty(),
+  check('Birthday', 'Birthday is required').notEmpty().toDate()
+], (req, res) => {
+  // Check for validation errors
   let errors = validationResult(req);
-
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
   }
@@ -137,7 +141,6 @@ app.post('/users', (req, res) => {
         // If the user is found, send a response that it already exists
         return res.status(400).send(req.body.Name + ' already exists');
       } else {
-
         // If no user was found, the code proceeds to create a new user using the hashed password
         Users.create({
           Name: req.body.Name,
@@ -158,18 +161,18 @@ app.post('/users', (req, res) => {
     });
 });
 
-/// Allow users to update their user info
-app.put('/users/:Name', (req, res) => {
-  // check the validation object for errors
-  let errors = validationResult(req);
 
+// Allow users to update their user info
+app.put('/users/:Name', [
+  check('Name', 'Name is required').notEmpty(),
+  check('Email', 'Email does not appear to be valid').isEmail(),
+  check('Password', 'Password is required').notEmpty(),
+  check('Birthday', 'Birthday is required').notEmpty().toDate()
+], (req, res) => {
+  // Check for validation errors
+  const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(422).json({ errors: errors.array() });
-  }
-
-  // Validate the request body data
-  if (!req.body.Name || !req.body.Email || !req.body.Birthday) {
-    return res.status(400).send('Incomplete user data');
   }
 
   Users.findOneAndUpdate(
@@ -185,6 +188,9 @@ app.put('/users/:Name', (req, res) => {
     },
     { new: true })
     .then(updatedUser => {
+      if (!updatedUser) {
+        return res.status(404).send('User not found');
+      }
       res.json(updatedUser);
     })
     .catch(err => {
