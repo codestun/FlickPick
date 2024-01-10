@@ -16,7 +16,14 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Set up CORS
 const cors = require('cors');
-let allowedOrigins = ['http://localhost:8080', 'http://testsite.com', 'http://localhost:1234', 'https://myflickpick.netlify.app'];
+let allowedOrigins = [
+  'http://localhost:8080',
+  'http://localhost:4200',
+  'https://flickpick-1911bf3985c5.herokuapp.com',
+  'http://localhost:1234', 
+  'https://myflickpick.netlify.app'
+];
+
 app.use(cors({
   origin: (origin, callback) => {
     if (!origin) return callback(null, true);
