@@ -24,7 +24,7 @@ The project demonstrates full-stack JavaScript development skills, focusing on t
 - **Hosted on Heroku:** [FlickPick](https://flickpick-1911bf3985c5.herokuapp.com/)
 - **App Documentation:** [Detailed endpoints list and usage instructions available.](https://flickpick-1911bf3985c5.herokuapp.com/documentation)
 
-### Technical Requirements
+## Technical Requirements
 - Node.js and Express application.
 - REST architecture.
 - Middleware modules utilization.
