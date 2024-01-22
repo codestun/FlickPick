@@ -20,8 +20,9 @@ let allowedOrigins = [
   'http://localhost:8080',
   'http://localhost:4200',
   'https://flickpick-1911bf3985c5.herokuapp.com',
-  'http://localhost:1234', 
-  'https://myflickpick.netlify.app'
+  'http://localhost:1234',
+  'https://myflickpick.netlify.app',
+  'https://codestun.github.io'
 ];
 
 app.use(cors({
