@@ -40,10 +40,13 @@ passport.use(new LocalStrategy({
     });
 }));
 
-// JWT strategy for authenticating users with JSON Web Tokens (JWT)
+/**
+ * Passport JWT Strategy for authenticating users with a JSON Web Token.
+ * @description This strategy is used for securing the API endpoints and validating the JWT in requests.
+ */
 passport.use(new JWTStrategy({
   jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 'your_jwt_secret'
+  secretOrKey: 'your_jwt_secret' // Replace 'your_jwt_secret' with your actual secret key
 }, (jwtPayload, callback) => {
 
   return Users.findById(jwtPayload._id)
